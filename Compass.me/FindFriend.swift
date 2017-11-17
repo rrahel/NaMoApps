@@ -12,11 +12,15 @@ import UIKit
 import Foundation
 
 class FindFriend: UIViewController {
+    var user: User!
     
     @IBOutlet weak var arrowImage: UIImageView!
     
     @IBOutlet weak var rotateImageButton: UIButton!
     
+    override func viewDidLoad() {
+        print(user.name)
+    }
     
     @IBAction func rotateImage(_ sender: Any) {
         
