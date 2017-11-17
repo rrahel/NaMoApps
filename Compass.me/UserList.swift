@@ -8,18 +8,6 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var users: [User] = []
     var filteredUsers: [User] = []
     
-    struct User {
-        let name: String
-        let lat: String
-        let lng: String
-        
-        init (dictionary: [String:Any]) {
-            self.name = dictionary["name"] as? String ?? ""
-            self.lat = dictionary["latitude"] as? String ?? ""
-            self.lng = dictionary["longitude"] as? String ?? ""
-        }
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -66,9 +54,9 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func gotoNextView(user: User)->Void{
-        let nextView = self.storyboard?.instantiateViewController(withIdentifier: "FindFriend")
-        // todo: set selected User for view
-        self.navigationController?.pushViewController(nextView!, animated: true)
+        let nextView = self.storyboard?.instantiateViewController(withIdentifier: "FindFriend") as! FindFriend
+        nextView.user = user
+        self.navigationController?.pushViewController(nextView, animated: true)
     }
     
     @IBAction func didChange(_ sender: Any) {
