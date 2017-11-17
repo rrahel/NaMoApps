@@ -12,6 +12,10 @@ import CoreLocation
 
 class ShareLocation: UIViewController, CLLocationManagerDelegate {
     
+    @IBOutlet weak var gpsIcon: UIImageView!
+    
+    
+    
     func loadUsername()->String{
         let userDefaults = UserDefaults.standard
         if let username = userDefaults.value(
@@ -67,16 +71,48 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         
         let userLocation: CLLocation = locations[0]
         let lat = userLocation.coordinate.latitude
-        let lon = userLocation.coordinate.longitude
-        let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-        sendLocationToServer(lat: location.latitude, lng: location.longitude)
+        let lng = userLocation.coordinate.longitude
+        let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
+        sendLocationToServer(lat: location.latitude, lng: location.longitude)
+    }
+    
+    // If we have been deined access give the user the option to change it
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if(status == CLAuthorizationStatus.denied) {
+            showLocationDisabledPopUp()
+        }
+    }
+    
+    // Show the popup to the user if we have been deined access
+    func showLocationDisabledPopUp() {
+        let alertController = UIAlertController(title: "Background Location Access Disabled",
+                                                message: "In order to let others find you we need your location",
+                                                preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("UserList started")
         getCurrentLocation()
+        
+        UIView.animate(withDuration: 7, delay: 0, options: [.autoreverse, .repeat], animations: {
+            self.gpsIcon.frame = CGRect(x: self.gpsIcon.frame.origin.x, y: self.gpsIcon.frame.origin.y, width: 0, height: 0)
+        }) { (value) in
+            
+        }
         
     }
     
@@ -85,7 +121,15 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParentViewController {
+            //make a request to server to stop the sharing status of the user
+        }
+    }
     
+
     
 }
 

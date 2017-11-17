@@ -148,7 +148,7 @@
                                         <rect key="frame" x="0.0" y="28" width="332" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oMD-4m-Ka8" id="IT5-6J-jnu">
-                                            <rect key="frame" x="0.0" y="0.0" width="332" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="332" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -255,6 +255,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="BT6-1h-xx5"/>
                     </view>
+                    <connections>
+                        <outlet property="gpsIcon" destination="A1V-De-8lr" id="bqT-ZZ-3SC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKN-jj-Wj5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
