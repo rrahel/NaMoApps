@@ -55,7 +55,7 @@
         <!--Find Friend-->
         <scene sceneID="gwf-X7-kHv">
             <objects>
-                <viewController id="Qn0-HZ-XP3" customClass="FindFriend" customModule="Compass_me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindFriend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qn0-HZ-XP3" customClass="FindFriend" customModule="Compass_me" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OYc-XN-KzD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

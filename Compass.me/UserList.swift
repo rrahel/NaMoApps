@@ -66,7 +66,7 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func gotoNextView(user: User)->Void{
-        let nextView = self.storyboard?.instantiateViewController(withIdentifier: "navigationView")
+        let nextView = self.storyboard?.instantiateViewController(withIdentifier: "FindFriend")
         // todo: set selected User for view
         self.navigationController?.pushViewController(nextView!, animated: true)
     }

@@ -21,7 +21,7 @@ class FindFriend: UIViewController {
     @IBAction func rotateImage(_ sender: Any) {
         
         UIView.animate(withDuration: 1.0) {
-            self.arrowImage.transform = __CGAffineTransformMake(1,0,1,1,0,0)
+             self.arrowImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         }
     }
     
