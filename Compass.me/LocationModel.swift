@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+public class LocationModel {
+public struct GeographicCoordinates{
+    var longitude = 0.0, latitude = 0.0
+}
+public struct FriendLocation {
+    var currentLocation = GeographicCoordinates();
+    var cooridinates : GeographicCoordinates {
+        get{
+            return GeographicCoordinates (longitude: currentLocation.longitude, latitude: currentLocation.latitude)
+        }
+        set(newLocation){
+            currentLocation.latitude = newLocation.latitude
+            currentLocation.longitude = newLocation.longitude
+        }
+    }
+    }}
