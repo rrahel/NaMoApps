@@ -25,5 +25,13 @@ class FindFriend: UIViewController {
         }
     }
     
+ 
+    func calculateRotation(){
+        
+        
+        
+        
+    }
+    
     
 }
