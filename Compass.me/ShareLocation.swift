@@ -108,8 +108,8 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         print("UserList started")
         getCurrentLocation()
         
-        UIView.animate(withDuration: 7, delay: 0, options: [.autoreverse, .repeat], animations: {
-            self.gpsIcon.frame = CGRect(x: self.gpsIcon.frame.origin.x, y: self.gpsIcon.frame.origin.y, width: 0, height: 0)
+        UIView.animate(withDuration: 1.5, delay: 0, options: [.autoreverse, .repeat], animations: {
+            self.gpsIcon.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         }) { (value) in
             
         }
