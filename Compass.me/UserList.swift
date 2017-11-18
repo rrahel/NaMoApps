@@ -34,7 +34,7 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
         users = []
         filteredUsers = []
         searchText.text = ""
-        let urlStr = "https://glacial-waters-86425.herokuapp.com/users"
+        let urlStr = UrlConstants.listUrl
         if let url = URL(string: urlStr) {
             if let d = try? Data(contentsOf: url) {
                 do {

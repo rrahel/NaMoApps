@@ -49,9 +49,11 @@ class ViewController: UIViewController {
     }
     
     func openAlert(){
-        let alert = UIAlertController(title: "Username", message: "Username already in use.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`))
-        self.present(alert, animated: true, completion: nil)
+        OperationQueue.main.addOperation {
+            let alert = UIAlertController(title: "Username", message: "Username already in use.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 
     @IBAction func login_btn(_ sender: Any) {
@@ -59,16 +61,38 @@ class ViewController: UIViewController {
             return
         }
         
-        let urlStr = "https://httpstat.us/200"
-        if let url = URL(string: urlStr) {
-            if let d = try? Data(contentsOf: url) {
+        sendUserNameToServer(userName: username_field!.text!)
+    }
+    
+    func sendUserNameToServer(userName: String) {
+        var request = URLRequest(url: URL(string: UrlConstants.loginUrl)!)
+        request.httpMethod = "POST"
+        let json: [String:Any] = ["id": userName]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else { // check for fundamental networking error
+                self.openAlert()
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                self.openAlert()
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print(responseString)
+            OperationQueue.main.addOperation {
                 // login successful, save:
-                persistUsername(userName: username_field.text!)
+                self.persistUsername(userName: self.username_field.text!)
                 // goto next view
-                gotoNextView(animate: true)
-            }else{
-                openAlert()
+                self.gotoNextView(animate: true)
             }
         }
+        task.resume()
     }
 }

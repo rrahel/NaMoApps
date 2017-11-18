@@ -44,10 +44,12 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
     func sendLocationToServer(lat: Double, lng: Double) {
         let username = loadUsername()
         
-        var request = URLRequest(url: URL(string: "https://glacial-waters-86425.herokuapp.com/users/\(username)")!)
-        request.httpMethod = "POST"
-        let postString = "longitude=\(lng)&latitude=\(lat)"
-        request.httpBody = postString.data(using: .utf8)
+        var request = URLRequest(url: URL(string: "https://glacial-waters-86425.herokuapp.com/position/\(username)")!)
+        request.httpMethod = "PUT"
+        let json: [String:Any] = ["latitude": lat, "longitude": lng]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
                 print("error=\(error)")
