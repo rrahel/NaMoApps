@@ -11,9 +11,9 @@ import Foundation
 
 class MainMenu: UIViewController {
     
-   
     
     override func viewDidLoad() {
+        self.navigationItem.setHidesBackButton(true, animated:true);
         super.viewDidLoad()
         
     }
