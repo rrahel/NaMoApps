@@ -13,42 +13,41 @@ import Foundation
 
 class FindFriend: UIViewController {
     var user: User!
-    @IBOutlet weak var arrowImage: UIImageView!
+    var locationAdjuster: LocationAdjuster!
     
+    @IBOutlet weak var arrowImage: UIImageView!
     @IBOutlet weak var rotateImageButton: UIButton!
     
     override func viewDidLoad() {
         print(user.name)
+        self.locationAdjuster = LocationAdjuster(findFriend: self)
     }
   
-    public struct GeographicCoordinates{
-        var longitude = 0.0, latitude = 0.0
-    }
-    public struct FriendLocation {
-        var currentLocation = GeographicCoordinates();
-        var cooridinates : GeographicCoordinates {
-            get{
-                return GeographicCoordinates (longitude: currentLocation.longitude, latitude: currentLocation.latitude)
-            }
-            set(newLocation){
-                currentLocation.latitude = newLocation.latitude
-                currentLocation.longitude = newLocation.longitude
-            }
-        }
-    }
     @IBAction func rotateImage(_ sender: Any) {
-        
+        let dice1 = arc4random_uniform(4) + 1;
+        calculateRotation(n: dice1);
+    }
+    
+    public func rotateImageWithLocation(radians: CGFloat) {
         UIView.animate(withDuration: 1.0) {
-             self.arrowImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            self.arrowImage.transform = CGAffineTransform(rotationAngle: radians)
         }
     }
-   
-    func calculateRotation(){
-    
+
+    func calculateRotation(n :UInt32){
         
-        
+        switch n {
+        case 1:
+             locationAdjuster.myCurrentLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: 15, latitude: 10)) ;
+        case 2:
+             locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: 40, latitude: 100)) ;
+        case 3:
+            locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: 100, latitude: 60)) ;
+        case 4:
+            locationAdjuster.myCurrentLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: 10, latitude: 5)) ;
+        default:
+           locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: 50, latitude: 60)) ;
+        }
         
     }
-    
-    
 }
