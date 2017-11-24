@@ -78,9 +78,9 @@ class ViewController: UIViewController {
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 201 {           // check for http errors
                 self.openAlert()
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("statusCode should be 201, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
             

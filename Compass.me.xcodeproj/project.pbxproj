@@ -20,7 +20,7 @@
 		05D02E001FB5F9E20002D827 /* ShareLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D02DFF1FB5F9E20002D827 /* ShareLocation.swift */; };
 		3425D4E71FC059100076929B /* UrlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3425D4E61FC059100076929B /* UrlConstants.swift */; };
 		34812F971FBF57B100228B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34812F961FBF57B100228B1C /* User.swift */; };
-		873580C81FBF606500CCEFE6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873580C71FBF606500CCEFE6 /* File.swift */; };
+		873580C81FBF606500CCEFE6 /* LocationAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */; };
 		873580CC1FBF696100CCEFE6 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873580CB1FBF696100CCEFE6 /* LocationModel.swift */; };
 		8761FF5D1FB5F2260020615F /* FindFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761FF5C1FB5F2260020615F /* FindFriend.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +41,7 @@
 		05D02DFF1FB5F9E20002D827 /* ShareLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLocation.swift; sourceTree = "<group>"; };
 		3425D4E61FC059100076929B /* UrlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlConstants.swift; sourceTree = "<group>"; };
 		34812F961FBF57B100228B1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		873580C71FBF606500CCEFE6 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAdjuster.swift; sourceTree = "<group>"; };
 		873580CB1FBF696100CCEFE6 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		8761FF5C1FB5F2260020615F /* FindFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +90,7 @@
 				8761FF5C1FB5F2260020615F /* FindFriend.swift */,
 				05D02DFF1FB5F9E20002D827 /* ShareLocation.swift */,
 				34812F961FBF57B100228B1C /* User.swift */,
-				873580C71FBF606500CCEFE6 /* File.swift */,
+				873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */,
 				873580CB1FBF696100CCEFE6 /* LocationModel.swift */,
 				3425D4E61FC059100076929B /* UrlConstants.swift */,
 			);
@@ -178,7 +178,7 @@
 				0575FF361FB1DC2B00C82C8D /* ViewController.swift in Sources */,
 				873580CC1FBF696100CCEFE6 /* LocationModel.swift in Sources */,
 				058020241FB4558000F59E25 /* MainMenu.swift in Sources */,
-				873580C81FBF606500CCEFE6 /* File.swift in Sources */,
+				873580C81FBF606500CCEFE6 /* LocationAdjuster.swift in Sources */,
 				3425D4E71FC059100076929B /* UrlConstants.swift in Sources */,
 				0575FF341FB1DC2B00C82C8D /* AppDelegate.swift in Sources */,
 				34812F971FBF57B100228B1C /* User.swift in Sources */,

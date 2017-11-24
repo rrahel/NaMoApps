@@ -1,5 +1,5 @@
 //
-//  LocationAdjuster.swift
+//  File.swift
 //  Compass.me
 //
 //  Created by Rauch Cornelia on 17/11/2017.
@@ -7,45 +7,69 @@
 //
 
 import Foundation
-extension Double {
-    var toRadians: Double { return self * .pi / 180 }
-    var toDegrees: Double { return self * 180 / .pi }
+import UIKit
+
+extension CGFloat {
+    var toRadians: CGFloat { return self * .pi / 180 }
+    var toDegrees: CGFloat { return self * 180 / .pi }
 }
 public class LocationAdjuster {
-    var distanceBetween:Double = 0.0;
     
-    var myCurrentLocation: FindFriend.FriendLocation = FindFriend.FriendLocation(currentLocation: FindFriend.GeographicCoordinates(longitude: 0, latitude: 0)){
-        willSet(newDistance) {
-            
-        }
-        didSet {
-            distance = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation)
+    var findFriend: FindFriend!
+    
+    init(findFriend: FindFriend){
+        self.findFriend = findFriend
+    }
+    var distanceBetween:CGFloat = 0.0;
+    
+    public struct GeographicCoordinates{
+        var longitude: CGFloat = 0.0, latitude: CGFloat = 0.0
+    }
+    public struct FriendLocation {
+        var currentLocation = GeographicCoordinates();
+        var cooridinates : GeographicCoordinates {
+            get{
+                return GeographicCoordinates (longitude: currentLocation.longitude, latitude: currentLocation.latitude)
+            }
+            set(newLocation){
+                currentLocation.latitude = newLocation.latitude
+                currentLocation.longitude = newLocation.longitude
+            }
         }
     }
     
-    var friendLocation: FindFriend.FriendLocation = FindFriend.FriendLocation(currentLocation: FindFriend.GeographicCoordinates(longitude: 0, latitude: 0)) {
-        willSet(newDistance) {
-        }
+     var myCurrentLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0))  {
+            didSet {
+                distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation)
+                print("\(distanceBetween)");
+                findFriend.rotateImageWithLocation(radians: distanceBetween)
+               
+            }
+    }
+    
+    public var friendLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0)) {
         didSet {
-            distance = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation)
+            distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation);
+            print("\(distanceBetween)");
+             findFriend.rotateImageWithLocation(radians: distanceBetween)
         }
     }
     
     
-    func calculateDistance(myLocation: FindFriend.FriendLocation, friendLocation: FindFriend.FriendLocation )->Float{
-        
-        let lat1 = myLocation.currentLocation.latitude.toRadians
-        let lon1 = myLocation.currentLocation.longitude.toRadians
-        
-        let lat2 = friendLocation.currentLocation.latitude.toRadians
-        let lon2 = friendLocation.currentLocation.longitude.toRadians
-        
-        let dLon = lon2 - lon1
-        
-        let y = sin(dLon) * cos(lat2)
-        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
-        let radiansBearing = atan2(y, x)
-        
-        return Float(radiansBearing)
-}
+   func calculateDistance(myLocation: FriendLocation, friendLocation: FriendLocation )-> CGFloat{
+    
+    let lat1 = myLocation.currentLocation.latitude.toRadians
+    let lon1 = myLocation.currentLocation.longitude.toRadians
+    
+    let lat2 = friendLocation.currentLocation.latitude.toRadians
+    let lon2 = friendLocation.currentLocation.longitude.toRadians
+    
+    let dLon = lon2 - lon1
+    
+    let y = sin(dLon) * cos(lat2)
+    let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+    let radiansBearing = atan2(y, x)
+    
+    return CGFloat(radiansBearing)
+    }
 }
