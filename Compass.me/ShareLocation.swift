@@ -14,8 +14,6 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var gpsIcon: UIImageView!
     
-    
-    
     func loadUsername()->String{
         let userDefaults = UserDefaults.standard
         if let username = userDefaults.value(
@@ -52,18 +50,17 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(error)")
+                print("error=\(String(describing: error))")
                 return
             }
             
             if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-                
+                print("response = \(String(describing: response))")
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(responseString)")
+            print("responseString = \(String(describing: responseString))")
         }
         task.resume()
         
@@ -115,7 +112,6 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         }) { (value) in
             
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,6 +120,29 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewWillDisappear(_ animated : Bool) {
+        let username = loadUsername()
+        
+        var request = URLRequest(url: URL(string: "https://glacial-waters-86425.herokuapp.com/sharing/\(username)")!)
+        request.httpMethod = "PUT"
+        let json: [String:Any] = ["sharing": false]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString))")
+        }
+        task.resume()
         super.viewWillDisappear(animated)
         
         if self.isMovingFromParentViewController {

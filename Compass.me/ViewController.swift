@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var login_btn: UIButton!
     @IBOutlet weak var username_field: UITextField!
     
+
+   
     func gotoNextView(animate: Bool)->Void{
         let nextView = self.storyboard?.instantiateViewController(withIdentifier: "mainMenu")
         self.navigationController?.pushViewController(nextView!, animated: animate)
@@ -60,39 +62,14 @@ class ViewController: UIViewController {
         guard username_field.text != "" else {
             return
         }
-        
-        sendUserNameToServer(userName: username_field!.text!)
-    }
-    
-    func sendUserNameToServer(userName: String) {
-        var request = URLRequest(url: URL(string: UrlConstants.loginUrl)!)
-        request.httpMethod = "POST"
-        let json: [String:Any] = ["id": userName]
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        request.httpBody = jsonData
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else { // check for fundamental networking error
-                self.openAlert()
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 201 {           // check for http errors
-                self.openAlert()
-                print("statusCode should be 201, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print(responseString)
-            OperationQueue.main.addOperation {
-                // login successful, save:
-                self.persistUsername(userName: self.username_field.text!)
-                // goto next view
-                self.gotoNextView(animate: true)
-            }
+        let result = HttpHandler.httpPost(UrlString: UrlConstants.loginUrl, RequestData: ["id": username_field!.text!])
+        if(result.result == false){
+            self.openAlert()
+        }else{
+            self.persistUsername(userName: username_field!.text!)
+            self.gotoNextView(animate: true)
         }
-        task.resume()
+
     }
+
 }
