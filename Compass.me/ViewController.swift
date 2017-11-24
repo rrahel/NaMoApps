@@ -20,27 +20,11 @@ class ViewController: UIViewController {
         let nextView = self.storyboard?.instantiateViewController(withIdentifier: "mainMenu")
         self.navigationController?.pushViewController(nextView!, animated: animate)
     }
-    
-    func loadUsername()->String{
-        let userDefaults = UserDefaults.standard
-        if let username = userDefaults.value(
-            forKey:"at.fhj.ims.t13.username") {
-            return username as! String
-        }else{
-            return ""
-        }
-    }
-    
-    func persistUsername(userName: String)->Void{
-        let userDefaults = UserDefaults.standard
-        userDefaults.setValue( userName, forKey: "at.fhj.ims.t13.username")
-        userDefaults.synchronize()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // username already saved?
-        let loadedUsername = loadUsername()
+        let loadedUsername = UsernameHandler.loadUsername()
         if (loadedUsername != "") {
             gotoNextView(animate: false)
         }
@@ -66,7 +50,7 @@ class ViewController: UIViewController {
         if(result.result == false){
             self.openAlert()
         }else{
-            self.persistUsername(userName: username_field!.text!)
+            UsernameHandler.persistUsername(userName: username_field!.text!)
             self.gotoNextView(animate: true)
         }
 

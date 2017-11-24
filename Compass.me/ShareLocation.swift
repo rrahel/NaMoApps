@@ -40,7 +40,7 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     func sendLocationToServer(lat: Double, lng: Double) {
-        let username = loadUsername()
+        let username = UsernameHandler.loadUsername()
         
         var request = URLRequest(url: URL(string: "https://glacial-waters-86425.herokuapp.com/position/\(username)")!)
         request.httpMethod = "PUT"
