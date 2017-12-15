@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var login_btn: UIButton!
     @IBOutlet weak var username_field: UITextField!
     
-
    
     func gotoNextView(animate: Bool)->Void{
         let nextView = self.storyboard?.instantiateViewController(withIdentifier: "mainMenu")

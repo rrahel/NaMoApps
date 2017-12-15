@@ -18,6 +18,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("delegate called")
+        let host = url.host
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        if (host != nil) {
+            // load the user
+            let urlStr = UrlConstants.listUrl + "/" + host!
+            if let url = URL(string: urlStr) {
+                if let d = try? Data(contentsOf: url) {
+                    do {
+                        let parsedData = try JSONSerialization.jsonObject(with: d as Data, options: []) as! [String:Any]
+                        let user = User(dictionary: parsedData)
+                        let nextView = mainStoryboard.instantiateViewController(withIdentifier: "FindFriend") as! FindFriend
+                        nextView.user = user
+                        self.window?.rootViewController = nextView
+                        self.window?.makeKeyAndVisible()
+                        return true;
+                    }catch let err{
+                        print("E: \(err)")
+                    }
+                }else{
+                    print("User could not be loaded")
+                }
+            }
+        }
+        
+        return false
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
