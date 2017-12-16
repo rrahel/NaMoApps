@@ -72,13 +72,30 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         let userLocation: CLLocation = locations[0]
         self.latitude = userLocation.coordinate.latitude
         self.longitude = userLocation.coordinate.longitude
-        print("location update: \(userLocation.coordinate.latitude) - \(userLocation.coordinate.longitude)")
         updateArrow()
+    }
+    private func orientationAdjustment() -> CGFloat {
+        let isFaceDown: Bool = {
+            switch UIDevice.current.orientation {
+            case .faceDown: return true
+            default: return false
+            }
+        }()
+        let adjAngle: CGFloat = {
+            switch UIDevice.current.orientation {
+            case .landscapeLeft:  return 90
+            case .landscapeRight: return -90
+            case .portrait, .unknown: return 0
+            case .portraitUpsideDown: return isFaceDown ? 180 : -180
+            default: return 0
+            }}()
+        return adjAngle
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.angle = Double(CGFloat(newHeading.trueHeading).toRadians)
-        print("heading update: \(newHeading.trueHeading)")
+        var angleInRadians = CGFloat(newHeading.trueHeading).toRadians
+        angleInRadians = self.orientationAdjustment().toRadians + angleInRadians
+        self.angle = Double(angleInRadians)
         updateArrow()
     }
     
