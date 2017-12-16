@@ -40,7 +40,11 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 do {
                     let parsedData = try JSONSerialization.jsonObject(with: d as Data, options: []) as! [[String:Any]]
                     for user in parsedData {
-                        users.append(User(dictionary: user))
+                        var newUser = User(dictionary: user)
+                        print(newUser.name)
+                        print(newUser.lng)
+                        print(newUser.lng)
+                        users.append(newUser)
                     }
                     filteredUsers = users
                     tableView.reloadData()
@@ -56,6 +60,10 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func gotoNextView(user: User)->Void{
         let nextView = self.storyboard?.instantiateViewController(withIdentifier: "FindFriend") as! FindFriend
         nextView.user = user
+        
+        print(user.name)
+        print(user.lng)
+        print(user.lng)
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     

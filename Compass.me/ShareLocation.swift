@@ -14,16 +14,6 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var gpsIcon: UIImageView!
     
-    func loadUsername()->String{
-        let userDefaults = UserDefaults.standard
-        if let username = userDefaults.value(
-            forKey:"at.fhj.ims.t13.username") {
-            return username as! String
-        }else{
-            return ""
-        }
-    }
-    
     var locationManager = CLLocationManager()
     
     func getCurrentLocation() {
@@ -44,7 +34,7 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         
         var request = URLRequest(url: URL(string: "https://glacial-waters-86425.herokuapp.com/position/\(username)")!)
         request.httpMethod = "PUT"
-        let json: [String:Any] = ["latitude": lat, "longitude": lng]
+        let json: [String:Any] = ["latitude": "\(lat)", "longitude": "\(lng)"]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -120,7 +110,7 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewWillDisappear(_ animated : Bool) {
-        let username = loadUsername()
+        let username = UsernameHandler.loadUsername()
         
         var request = URLRequest(url: URL(string: "https://glacial-waters-86425.herokuapp.com/sharing/\(username)")!)
         request.httpMethod = "PUT"

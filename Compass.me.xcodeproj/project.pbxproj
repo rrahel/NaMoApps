@@ -19,6 +19,7 @@
 		058020261FB4612E00F59E25 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 058020251FB4612E00F59E25 /* UserList.swift */; };
 		05D02E001FB5F9E20002D827 /* ShareLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D02DFF1FB5F9E20002D827 /* ShareLocation.swift */; };
 		3425D4E71FC059100076929B /* UrlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3425D4E61FC059100076929B /* UrlConstants.swift */; };
+		346CF3B31FE54E6F00823875 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346CF3B21FE54E6F00823875 /* Helper.swift */; };
 		34812F971FBF57B100228B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34812F961FBF57B100228B1C /* User.swift */; };
 		873580C81FBF606500CCEFE6 /* LocationAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */; };
 		873580CC1FBF696100CCEFE6 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873580CB1FBF696100CCEFE6 /* LocationModel.swift */; };
@@ -42,6 +43,7 @@
 		058020251FB4612E00F59E25 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		05D02DFF1FB5F9E20002D827 /* ShareLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLocation.swift; sourceTree = "<group>"; };
 		3425D4E61FC059100076929B /* UrlConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlConstants.swift; sourceTree = "<group>"; };
+		346CF3B21FE54E6F00823875 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		34812F961FBF57B100228B1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAdjuster.swift; sourceTree = "<group>"; };
 		873580CB1FBF696100CCEFE6 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				3425D4E61FC059100076929B /* UrlConstants.swift */,
 				875494551FC8978800E962D8 /* HttpHandler.swift */,
 				875494571FC8A2FC00E962D8 /* UsernameHandler.swift */,
+				346CF3B21FE54E6F00823875 /* Helper.swift */,
 			);
 			path = Compass.me;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				058020241FB4558000F59E25 /* MainMenu.swift in Sources */,
 				873580C81FBF606500CCEFE6 /* LocationAdjuster.swift in Sources */,
 				3425D4E71FC059100076929B /* UrlConstants.swift in Sources */,
+				346CF3B31FE54E6F00823875 /* Helper.swift in Sources */,
 				0575FF341FB1DC2B00C82C8D /* AppDelegate.swift in Sources */,
 				34812F971FBF57B100228B1C /* User.swift in Sources */,
 			);
@@ -327,6 +331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N4U7DRKE88;
 				INFOPLIST_FILE = Compass.me/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "at.fhj.ims.t13.Compass-me";
@@ -341,6 +346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N4U7DRKE88;
 				INFOPLIST_FILE = Compass.me/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "at.fhj.ims.t13.Compass-me";

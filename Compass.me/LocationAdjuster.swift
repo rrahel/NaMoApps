@@ -9,10 +9,7 @@
 import Foundation
 import UIKit
 
-extension CGFloat {
-    var toRadians: CGFloat { return self * .pi / 180 }
-    var toDegrees: CGFloat { return self * 180 / .pi }
-}
+
 public class LocationAdjuster {
     
     var findFriend: FindFriend!
@@ -36,22 +33,23 @@ public class LocationAdjuster {
                 currentLocation.longitude = newLocation.longitude
             }
         }
+        var heading: CGFloat
     }
     
-     var myCurrentLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0))  {
+    var myCurrentLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0), heading: 0.0)  {
             didSet {
                 distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation)
                 print("\(distanceBetween)");
-                findFriend.rotateImageWithLocation(radians: distanceBetween)
+                findFriend.rotateImageWithLocation(radians: distanceBetween - myCurrentLocation.heading)
                
             }
     }
     
-    public var friendLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0)) {
+    public var friendLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0), heading: 0.0) {
         didSet {
             distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation);
             print("\(distanceBetween)");
-             findFriend.rotateImageWithLocation(radians: distanceBetween)
+             findFriend.rotateImageWithLocation(radians: distanceBetween - myCurrentLocation.heading)
         }
     }
     
