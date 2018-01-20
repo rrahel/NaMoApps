@@ -15,7 +15,7 @@ class MainMenu: UIViewController {
     override func viewDidLoad() {
         self.navigationItem.setHidesBackButton(true, animated:true);
         super.viewDidLoad()
-        
+        NotificationHelper.sendNotification()
     }
     
     override func didReceiveMemoryWarning() {

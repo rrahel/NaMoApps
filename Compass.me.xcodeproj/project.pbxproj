@@ -21,6 +21,7 @@
 		3425D4E71FC059100076929B /* UrlConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3425D4E61FC059100076929B /* UrlConstants.swift */; };
 		3444492120136BDC00CAD25B /* Compass_meTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444492020136BDC00CAD25B /* Compass_meTest.swift */; };
 		3444492F2013743B00CAD25B /* Compass_meUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3444492E2013743B00CAD25B /* Compass_meUITests.swift */; };
+		344449382013848100CAD25B /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344449372013848100CAD25B /* NotificationHelper.swift */; };
 		346CF3B31FE54E6F00823875 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346CF3B21FE54E6F00823875 /* Helper.swift */; };
 		34812F971FBF57B100228B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34812F961FBF57B100228B1C /* User.swift */; };
 		873580C81FBF606500CCEFE6 /* LocationAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */; };
@@ -76,6 +77,7 @@
 		3444492C2013743A00CAD25B /* Compass.meUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Compass.meUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3444492E2013743B00CAD25B /* Compass_meUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass_meUITests.swift; sourceTree = "<group>"; };
 		344449302013743B00CAD25B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		344449372013848100CAD25B /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		346CF3B21FE54E6F00823875 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		34812F961FBF57B100228B1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		873580C71FBF606500CCEFE6 /* LocationAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAdjuster.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				0575FF331FB1DC2B00C82C8D /* AppDelegate.swift */,
+				344449372013848100CAD25B /* NotificationHelper.swift */,
 				0575FF451FB1E00800C82C8D /* logo.png */,
 				0575FF351FB1DC2B00C82C8D /* ViewController.swift */,
 				0575FF371FB1DC2B00C82C8D /* Main.storyboard */,
@@ -375,6 +378,7 @@
 				875494561FC8978800E962D8 /* HttpHandler.swift in Sources */,
 				058020261FB4612E00F59E25 /* UserList.swift in Sources */,
 				0575FF361FB1DC2B00C82C8D /* ViewController.swift in Sources */,
+				344449382013848100CAD25B /* NotificationHelper.swift in Sources */,
 				873580CC1FBF696100CCEFE6 /* LocationModel.swift in Sources */,
 				058020241FB4558000F59E25 /* MainMenu.swift in Sources */,
 				873580C81FBF606500CCEFE6 /* LocationAdjuster.swift in Sources */,
