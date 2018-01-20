@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 
 public class LocationAdjuster {
@@ -41,7 +42,8 @@ public class LocationAdjuster {
                 distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation)
                 print("\(distanceBetween)");
                 findFriend.rotateImageWithLocation(radians: distanceBetween - myCurrentLocation.heading)
-               
+                let distance = getDistance(myLocation: myCurrentLocation.currentLocation, friendLocation: friendLocation.currentLocation)
+                findFriend.distanceLabel.text = String(format: "%.0f Meter", distance)
             }
     }
     
@@ -50,12 +52,14 @@ public class LocationAdjuster {
             distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation);
             print("\(distanceBetween)");
              findFriend.rotateImageWithLocation(radians: distanceBetween - myCurrentLocation.heading)
+            let distance = getDistance(myLocation: myCurrentLocation.currentLocation, friendLocation: friendLocation.currentLocation)
+            findFriend.distanceLabel.text = String(format: "%.0f Meter", distance)
         }
     }
     
     
    func calculateDistance(myLocation: FriendLocation, friendLocation: FriendLocation )-> CGFloat{
-    
+    // not actually the distance
     let lat1 = myLocation.currentLocation.latitude.toRadians
     let lon1 = myLocation.currentLocation.longitude.toRadians
     
@@ -69,5 +73,14 @@ public class LocationAdjuster {
     let radiansBearing = atan2(y, x)
     
     return CGFloat(radiansBearing)
+    }
+    
+    public func getDistance(myLocation : GeographicCoordinates, friendLocation : GeographicCoordinates) ->  Double {
+        var my = CLLocation(latitude: Double(myLocation.latitude), longitude: Double(myLocation.longitude))
+        var friend = CLLocation(latitude: Double(friendLocation.latitude), longitude: Double(friendLocation.longitude))
+        let distanceInMeters = my.distance(from: friend)
+        
+        print("\(distanceInMeters)")
+        return distanceInMeters
     }
 }

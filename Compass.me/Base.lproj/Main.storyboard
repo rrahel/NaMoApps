@@ -85,21 +85,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0R-ph-WZn">
-                                <rect key="frame" x="164" y="491" width="46" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s83-bd-3Jy">
+                                <rect key="frame" x="124" y="453" width="135" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="rotateImage:" destination="Qn0-HZ-XP3" eventType="touchUpInside" id="ieI-eL-Kup"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="KuO-cN-Vrq"/>
                     </view>
                     <connections>
                         <outlet property="arrowImage" destination="T1V-Bz-EQS" id="CD9-ha-2VF"/>
-                        <outlet property="rotateImageButton" destination="S0R-ph-WZn" id="XIA-B9-ON3"/>
+                        <outlet property="distanceLabel" destination="s83-bd-3Jy" id="9qR-PU-5eS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBa-qa-JQS" userLabel="First Responder" sceneMemberID="firstResponder"/>

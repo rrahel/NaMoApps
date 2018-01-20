@@ -21,6 +21,7 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
     
     @IBOutlet weak var arrowImage: UIImageView!
     @IBOutlet weak var rotateImageButton: UIButton!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     var latitude = 0.0
     var longitude = 0.0
