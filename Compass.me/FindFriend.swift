@@ -20,8 +20,8 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
     var myTimer: Timer? = nil
     
     @IBOutlet weak var arrowImage: UIImageView!
-    @IBOutlet weak var rotateImageButton: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     var latitude = 0.0
     var longitude = 0.0
@@ -39,7 +39,7 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         myTimer = Timer.scheduledTimer(withTimeInterval: refreshrate, repeats: true, block: { (timer) in
             //self.locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: friendlongitude, latitude: friendlatitude), )  todo: api call to request friends location
         })
-        
+        usernameLabel.text = user.name
     }
     
     public func rotateImageWithLocation(radians: CGFloat) {

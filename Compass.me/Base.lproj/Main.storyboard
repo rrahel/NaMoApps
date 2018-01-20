@@ -99,6 +99,7 @@
                     <connections>
                         <outlet property="arrowImage" destination="T1V-Bz-EQS" id="CD9-ha-2VF"/>
                         <outlet property="distanceLabel" destination="s83-bd-3Jy" id="9qR-PU-5eS"/>
+                        <outlet property="usernameLabel" destination="5qM-uv-BFd" id="MOB-eC-6ut"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBa-qa-JQS" userLabel="First Responder" sceneMemberID="firstResponder"/>
