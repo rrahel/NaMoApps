@@ -27,6 +27,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityIdentifier = "loginView"
         self.hideKeyboardWhenTappedAround()
         // username already saved?
         let loadedUsername = UsernameHandler.loadUsername()
