@@ -76,8 +76,8 @@ public class LocationAdjuster {
     }
     
     public func getDistance(myLocation : GeographicCoordinates, friendLocation : GeographicCoordinates) ->  Double {
-        var my = CLLocation(latitude: Double(myLocation.latitude), longitude: Double(myLocation.longitude))
-        var friend = CLLocation(latitude: Double(friendLocation.latitude), longitude: Double(friendLocation.longitude))
+        let my = CLLocation(latitude: Double(myLocation.latitude), longitude: Double(myLocation.longitude))
+        let friend = CLLocation(latitude: Double(friendLocation.latitude), longitude: Double(friendLocation.longitude))
         let distanceInMeters = my.distance(from: friend)
         
         print("\(distanceInMeters)")
