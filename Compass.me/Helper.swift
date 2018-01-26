@@ -25,3 +25,12 @@ public extension CGFloat {
     var toRadians: CGFloat { return self * .pi / 180 }
     var toDegrees: CGFloat { return self * 180 / .pi }
 }
+
+public extension String {
+    func ToCGFloat() -> CGFloat {
+        guard let doubleValue = Double(self) else {
+            return CGFloat(0.0)
+        }
+        return CGFloat(doubleValue)
+    }
+}

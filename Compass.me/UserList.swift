@@ -61,9 +61,6 @@ class UserList: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let nextView = self.storyboard?.instantiateViewController(withIdentifier: "FindFriend") as! FindFriend
         nextView.user = user
         
-        print(user.name)
-        print(user.lng)
-        print(user.lng)
         self.navigationController?.pushViewController(nextView, animated: true)
     }
     

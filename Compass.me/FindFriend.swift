@@ -28,33 +28,32 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
     var angle = 0.0
     
     override func viewDidLoad() {
-        print(user.name)
         self.locationAdjuster = LocationAdjuster(findFriend: self)
         getCurrentLocation()
-        print(user.lat)
-        print(user.lng)
-        //let friendlatitude = CGFloat(NumberFormatter().number(from: user.lat)!)
-        //let friendlongitude = CGFloat(NumberFormatter().number(from: user.lng)!)
+        
+        let friendlatitude = user.lat.ToCGFloat()
+        let friendlongitude = user.lng.ToCGFloat()
+        print("USER LAT: \(friendlatitude)")
+        print("USER LNG: \(friendlongitude)")
+        
+        locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: friendlongitude, latitude:friendlatitude), heading: 0.0)
 
-        myTimer = Timer.scheduledTimer(withTimeInterval: refreshrate, repeats: true, block: { (timer) in
-            //self.locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: friendlongitude, latitude: friendlatitude), )  todo: api call to request friends location
-        })
         usernameLabel.text = user.name
     }
     
     public func rotateImageWithLocation(radians: CGFloat) {
         UIView.animate(withDuration: 1.0) {
+            print(" Radians: \(radians)")
             self.arrowImage.transform = CGAffineTransform(rotationAngle: radians)
         }
     }
      var locationManager = CLLocationManager()
-    
     func getCurrentLocation() {
         
         // keep informed of user's position
         locationManager.delegate = self
         // set accuracy level
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         // request user position authorization
         locationManager.requestWhenInUseAuthorization()
         // start location fetching
@@ -66,6 +65,9 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         let lat = CGFloat(self.latitude)
         let lng = CGFloat(self.longitude)
         var heading = CGFloat(self.angle)
+        print("OWN LAT: \(self.latitude)")
+        print("OWN LNG: \(self.longitude)")
+        print("Angle: \(self.angle)")
         locationAdjuster.myCurrentLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: lng, latitude:lat), heading: heading)
     }
     
@@ -73,6 +75,7 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         let userLocation: CLLocation = locations[0]
         self.latitude = userLocation.coordinate.latitude
         self.longitude = userLocation.coordinate.longitude
+       
         updateArrow()
     }
     private func orientationAdjustment() -> CGFloat {

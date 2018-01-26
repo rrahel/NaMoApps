@@ -40,20 +40,20 @@ public class LocationAdjuster {
     var myCurrentLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0), heading: 0.0)  {
             didSet {
                 distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation)
-                print("\(distanceBetween)");
                 findFriend.rotateImageWithLocation(radians: distanceBetween - myCurrentLocation.heading)
                 let distance = getDistance(myLocation: myCurrentLocation.currentLocation, friendLocation: friendLocation.currentLocation)
-                findFriend.distanceLabel.text = String(format: "%.0f Meter", distance)
+                findFriend.distanceLabel.text = distance
+                print("UPDATING DISTANCE: \(distance)")
             }
     }
     
     public var friendLocation: FriendLocation = FriendLocation(currentLocation: GeographicCoordinates(longitude: 0, latitude: 0), heading: 0.0) {
         didSet {
             distanceBetween = calculateDistance(myLocation: myCurrentLocation, friendLocation: friendLocation);
-            print("\(distanceBetween)");
              findFriend.rotateImageWithLocation(radians: distanceBetween - myCurrentLocation.heading)
             let distance = getDistance(myLocation: myCurrentLocation.currentLocation, friendLocation: friendLocation.currentLocation)
-            findFriend.distanceLabel.text = String(format: "%.0f Meter", distance)
+            findFriend.distanceLabel.text = distance
+            print("UPDATING DISTANCE: \(distance)")
         }
     }
     
@@ -71,16 +71,29 @@ public class LocationAdjuster {
     let y = sin(dLon) * cos(lat2)
     let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
     let radiansBearing = atan2(y, x)
-    
     return CGFloat(radiansBearing)
     }
     
-    public func getDistance(myLocation : GeographicCoordinates, friendLocation : GeographicCoordinates) ->  Double {
+    public func getDistance(myLocation : GeographicCoordinates, friendLocation : GeographicCoordinates) ->  String {
         let my = CLLocation(latitude: Double(myLocation.latitude), longitude: Double(myLocation.longitude))
         let friend = CLLocation(latitude: Double(friendLocation.latitude), longitude: Double(friendLocation.longitude))
         let distanceInMeters = my.distance(from: friend)
         
-        print("\(distanceInMeters)")
-        return distanceInMeters
+        let roundedDistance = roundToTens(x: distanceInMeters)
+        
+        if (roundedDistance == 0) {
+            return "less than 10 meters"
+        }
+        
+        if (roundedDistance > 1000) {
+            let kilometers = round(distanceInMeters / 1000)
+            return "about \(kilometers) kilometers"
+        }
+        
+        return "about \(roundedDistance) meters"
+    }
+    
+    func roundToTens(x: Double) -> Int {
+        return 10 * Int((x / 10.0).rounded(.up))
     }
 }
