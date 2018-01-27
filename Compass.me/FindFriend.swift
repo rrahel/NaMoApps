@@ -15,8 +15,7 @@ import CoreLocation
 class FindFriend: UIViewController , CLLocationManagerDelegate {
     var user: User!
     var locationAdjuster: LocationAdjuster!
-
-    let refreshrate = 0.1
+    var userFromDatabase: User!
     var myTimer: Timer? = nil
     
     @IBOutlet weak var arrowImage: UIImageView!
@@ -27,18 +26,30 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
     var longitude = 0.0
     var angle = 0.0
     
+    
     override func viewDidLoad() {
         self.locationAdjuster = LocationAdjuster(findFriend: self)
         getCurrentLocation()
-        
+        self.userFromDatabase = user;
         let friendlatitude = user.lat.ToCGFloat()
         let friendlongitude = user.lng.ToCGFloat()
         print("USER LAT: \(friendlatitude)")
         print("USER LNG: \(friendlongitude)")
         
+        initalTimer()
         locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: friendlongitude, latitude:friendlatitude), heading: 0.0)
-
+        
         usernameLabel.text = user.name
+    }
+    
+    @objc public func updateUserData(){
+        print("Timer called");
+        self.loadUser()
+        self.locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: self.userFromDatabase.lng.ToCGFloat(), latitude: self.userFromDatabase.lat.ToCGFloat()), heading: 0.0)
+    }
+    
+    public func initalTimer(){
+        myTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(updateUserData), userInfo: nil, repeats: true)
     }
     
     public func rotateImageWithLocation(radians: CGFloat) {
@@ -47,9 +58,8 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
             self.arrowImage.transform = CGAffineTransform(rotationAngle: radians)
         }
     }
-     var locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     func getCurrentLocation() {
-        
         // keep informed of user's position
         locationManager.delegate = self
         // set accuracy level
@@ -60,6 +70,25 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         locationManager.startUpdatingHeading()
         locationManager.startUpdatingLocation()
     }
+    
+    func loadUser()->Void{
+        let urlStr = UrlConstants.listUrl + "/" + user.name
+        
+        if let url = URL(string: urlStr) {
+            if let d = try? Data(contentsOf: url) {
+                do {
+                    let parsedData = try JSONSerialization.jsonObject(with: d as Data) as! [String:AnyObject]
+                    print(" Userdata \(parsedData)")
+                    userFromDatabase = User(dictionary: parsedData)
+                }catch let err{
+                    print("E: \(err)")
+                }
+            }else{
+                print("List could not be loaded")
+            }
+        }
+    }
+    
     
     func updateArrow() {
         let lat = CGFloat(self.latitude)
@@ -75,7 +104,7 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         let userLocation: CLLocation = locations[0]
         self.latitude = userLocation.coordinate.latitude
         self.longitude = userLocation.coordinate.longitude
-       
+        
         updateArrow()
     }
     private func orientationAdjustment() -> CGFloat {
@@ -128,3 +157,4 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
