@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CoreLocation
 
-
 public class LocationAdjuster {
     
     var findFriend: FindFriend!
