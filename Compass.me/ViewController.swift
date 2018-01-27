@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.accessibilityIdentifier = "loginView"
         self.hideKeyboardWhenTappedAround()
+        self.moveViewWhenKeyboardAppears()
+
         // username already saved?
         let loadedUsername = UsernameHandler.loadUsername()
         if (loadedUsername != "") {
@@ -36,6 +38,7 @@ class ViewController: UIViewController {
         } else {
             print("user is not persisted")
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
