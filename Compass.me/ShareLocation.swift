@@ -4,6 +4,9 @@
 //
 //  Created by Cemi Rrahel on 10/11/2017.
 //
+/*
+ Updates the location of the device on the server and sets the sharing property to false.
+ */
 
 
 import UIKit
@@ -26,7 +29,6 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         // start location fetching
         locationManager.startUpdatingLocation()
-        
     }
     
     func sendLocationToServer(lat: Double, lng: Double) {
@@ -119,7 +121,7 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            guard let data = data, error == nil else {
                 print("error=\(String(describing: error))")
                 return
             }
@@ -139,9 +141,6 @@ class ShareLocation: UIViewController, CLLocationManagerDelegate {
             //make a request to server to stop the sharing status of the user
         }
     }
-    
-
-    
 }
 
 

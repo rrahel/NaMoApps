@@ -17,7 +17,7 @@ var responseData: ResponseData = ResponseData(result: false, data: "");
 
 class HttpHandler {
     
-   class func httpPost(UrlString: String, RequestData: [String:Any]) -> ResponseData{
+   /*class func httpPost(UrlString: String, RequestData: [String:Any]) -> ResponseData{
         var request = URLRequest(url: URL(string: UrlString )!)
         request.httpMethod = "POST"
         let json: [String:Any] = RequestData
@@ -46,7 +46,7 @@ class HttpHandler {
         }
         task.resume()
         return responseData;
-    }
+    }*/
     
     
 }

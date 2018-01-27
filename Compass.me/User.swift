@@ -5,6 +5,9 @@
 //  Created by Kogler Christian on 17/11/2017.
 //  Copyright © 2017 Cemi Rrahel. All rights reserved.
 //
+/*
+  Helper class User model
+ */
 
 import Foundation
 class User {

@@ -4,7 +4,8 @@
 //
 //  Created by Kogler Christian on 20.01.18.
 //  Copyright © 2018 Cemi Rrahel. All rights reserved.
-//
+
+//  To be used for sending notifications to users. (Not really needed, but implemented because it was required)
 
 import Foundation
 import UserNotifications

@@ -5,6 +5,7 @@
 //  Created by Cemi Rrahel on 07/11/2017.
 //  Copyright © 2017 Cemi Rrahel. All rights reserved.
 //
+//  Controller for the login-view (handles user authentication). Authentication step skips, if the user is already logged in (using UserDefaults)
 
 import UIKit
 import Foundation
@@ -22,7 +23,6 @@ class ViewController: UIViewController {
             let nextView = self.storyboard?.instantiateViewController(withIdentifier: "mainMenu")
             self.navigationController?.pushViewController(nextView!, animated: animate)
         }
-        
     }
 
     override func viewDidLoad() {
@@ -59,9 +59,8 @@ class ViewController: UIViewController {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else { // check for fundamental networking error
+            guard let _ = data, error == nil else { // check for fundamental networking error
                 print("error=\(String(describing: error))")
-                responseData = ResponseData(result: false, data: "");
                 return
             }
             let httpStatus = (response as? HTTPURLResponse)?.statusCode
@@ -97,7 +96,6 @@ class ViewController: UIViewController {
             spinnerView.addSubview(ai)
             onView.addSubview(spinnerView)
         }
-        
         return spinnerView
     }
     

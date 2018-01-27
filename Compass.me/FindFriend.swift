@@ -5,6 +5,13 @@
 //  Created by Rauch Cornelia on 10/11/2017.
 //  Copyright © 2017 Cemi Rrahel. All rights reserved.
 //
+/*
+ Updates location from current user and friend. With the help of a timer the friends
+ location is updated every 15 seconds.
+ According to the users current location and friend location the arrow rotates in the direction of the
+ friend and shows the approximate distance.
+ */
+
 
 import Foundation
 
@@ -36,17 +43,20 @@ class FindFriend: UIViewController , CLLocationManagerDelegate {
         print("USER LAT: \(friendlatitude)")
         print("USER LNG: \(friendlongitude)")
         
+        //call friend location update
         initalTimer()
         locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: friendlongitude, latitude:friendlatitude), heading: 0.0)
         
         usernameLabel.text = user.name
     }
     
+    //get friend new location
     @objc public func updateUserData(){
         print("Timer called");
         self.loadUser()
         self.locationAdjuster.friendLocation = LocationAdjuster.FriendLocation(currentLocation: LocationAdjuster.GeographicCoordinates(longitude: self.userFromDatabase.lng.ToCGFloat(), latitude: self.userFromDatabase.lat.ToCGFloat()), heading: 0.0)
     }
+    
     
     public func initalTimer(){
         myTimer = Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(updateUserData), userInfo: nil, repeats: true)

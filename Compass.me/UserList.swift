@@ -1,3 +1,7 @@
+/*
+ Shows a list of all users that are currently sharing their location. 
+ */
+
 import UIKit
 import Foundation
 

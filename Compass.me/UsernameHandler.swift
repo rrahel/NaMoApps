@@ -5,6 +5,7 @@
 //  Created by Rauch Cornelia on 24.11.17.
 //  Copyright © 2017 Cemi Rrahel. All rights reserved.
 //
+//  Persists and reads the users login-data (username) to device, so subsequent logins can be skipped
 
 import Foundation
 
