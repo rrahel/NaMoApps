@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.accessibilityIdentifier = "loginView"
         self.hideKeyboardWhenTappedAround()
+        self.moveViewWhenKeyboardAppears()
+
         // username already saved?
         let loadedUsername = UsernameHandler.loadUsername()
         if (loadedUsername != "") {
@@ -36,6 +38,7 @@ class ViewController: UIViewController {
         } else {
             print("user is not persisted")
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,25 +86,5 @@ class ViewController: UIViewController {
         }
         print("checking name")
         sendLogin(username: username_field.text!)
-    }
-    
-    private func displaySpinner(onView : UIView) -> UIView {
-        let spinnerView = UIView.init(frame: onView.bounds)
-        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        let ai = UIActivityIndicatorView.init(activityIndicatorStyle: .whiteLarge)
-        ai.startAnimating()
-        ai.center = spinnerView.center
-        
-        DispatchQueue.main.async {
-            spinnerView.addSubview(ai)
-            onView.addSubview(spinnerView)
-        }
-        return spinnerView
-    }
-    
-    private func removeSpinner(spinner :UIView) {
-        DispatchQueue.main.async {
-            spinner.removeFromSuperview()
-        }
     }
 }
