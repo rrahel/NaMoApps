@@ -5,6 +5,7 @@
 //  Created by Cemi Rrahel on 07/11/2017.
 //  Copyright © 2017 Cemi Rrahel. All rights reserved.
 //
+//  Main menu - just buttons, nothing to see here
 
 import UIKit
 import Foundation

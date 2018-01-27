@@ -5,7 +5,7 @@
 //  Created by Kogler Christian on 16.12.17.
 //  Copyright © 2017 Cemi Rrahel. All rights reserved.
 //
-
+//  General helpers (for different purposes)
 import Foundation
 import UIKit
 
